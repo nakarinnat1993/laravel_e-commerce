@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::All();
+        $categories = Category::orderBy('id', 'desc')->paginate(3);
         return view('admin.CategoryForm', compact('categories'));
     }
     public function create()

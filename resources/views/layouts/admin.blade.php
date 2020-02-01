@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-1 bg-white border-bottom shadow-sm">
         <h5 class="my-0 mr-md-auto font-weight-normal">Admin Panel</h5>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="#">Home</a>
@@ -27,7 +27,7 @@
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">Overview</div>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+                <a href="/admin/ProductDashboard" class="list-group-item list-group-item-action bg-light">Dashboard</a>
                 <a href="/admin/createProduct" class="list-group-item list-group-item-action bg-light">Product</a>
                 <a href="/admin/createCategory" class="list-group-item list-group-item-action bg-light">Category</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Order</a>

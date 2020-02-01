@@ -29,12 +29,12 @@
                 <a href="/admin/editCategory/{{$category->id}}" class="btn btn-warning">Edit</a>
             </td>
             <td>
-                <a href="/admin/deleteCategory/{{$category->id}}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                <a href="/admin/deleteCategory/{{$category->id}}" class="btn btn-danger" onclick="return confirm('Are you sure ?')">Delete</a>
             </td>
         </tr>
 
         @endforeach
     </table>
-
+    {{$categories->links()}}
 </div>
 @endsection
