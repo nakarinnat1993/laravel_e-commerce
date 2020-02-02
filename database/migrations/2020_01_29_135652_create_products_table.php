@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->decimal('price',8,2);
             $table->integer('category_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

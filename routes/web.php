@@ -30,5 +30,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/ProductDashboard', 'Admin\ProductController@index');
     Route::get('/admin/createProduct', 'Admin\ProductController@create');
     Route::post('/admin/createProduct', 'Admin\ProductController@store');
+    Route::get('/admin/editProduct/{id}', 'Admin\ProductController@edit');
+    Route::post('/admin/updateProduct/{id}', 'Admin\ProductController@update');
+    Route::get('/admin/deleteProduct/{id}', 'Admin\ProductController@delete');
 
 });
