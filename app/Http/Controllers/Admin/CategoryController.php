@@ -51,6 +51,12 @@ class CategoryController extends Controller
     }
     public function delete($id)
     {
+        $category = Category::find($id);
+        if($category->products->count()>0){
+            session()->flash('error','Can not delete because product was created');
+            return redirect()->back();
+        }
+
         Category::destroy($id);
 
         Session()->flash('success', 'Delete success');

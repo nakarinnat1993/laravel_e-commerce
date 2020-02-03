@@ -9,15 +9,18 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
                     @endif
 
-                   <p>Name : {!! Auth::user()->name !!}</p>
-                   <p>Email : {!! Auth::user()->email !!}</p>
-                   <a href="admin/ProductDashboard" class="btn btn-primary">Product Management</a>
-                   <a href="#" class="btn btn-success">Home</a>
+                    <p>Name : {!! Auth::user()->name !!}</p>
+                    <p>Email : {!! Auth::user()->email !!}</p>
+
+                    @if (Auth::user()->isAdmin)
+                    <a href="admin/ProductDashboard" class="btn btn-primary">Product Management</a>
+                    @endif
+                    <a href="#" class="btn btn-success">Home</a>
                 </div>
             </div>
         </div>

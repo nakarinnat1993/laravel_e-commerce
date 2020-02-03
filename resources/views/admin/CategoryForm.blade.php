@@ -18,6 +18,7 @@
         <tr>
             <th>No</th>
             <th>Name</th>
+            <th>Count Product</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -25,6 +26,7 @@
         <tr>
             <td>{{$category->id}}</td>
             <td>{{$category->name}}</td>
+            <td>{{$category->products->count()}}</td>
             <td>
                 <a href="/admin/editCategory/{{$category->id}}" class="btn btn-warning">Edit</a>
             </td>

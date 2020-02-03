@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("verifyCategory")->only(['create']);
+    }
     public function index()
     {
         $products = Product::orderBy('id', 'desc')->paginate('3');

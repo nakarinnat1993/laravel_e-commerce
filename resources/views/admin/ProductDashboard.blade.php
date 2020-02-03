@@ -19,7 +19,7 @@
             <td><img src="{{asset('storage')}}/product_image/{{$product->image}}" alt="" srcset="" width="80px"></td>
             <td>{{$product->name}}</td>
             <td>{{$product->category->name}}</td>
-            <td>{{$product->description}}</td>
+            <td>{{Str::limit($product->description,20)}}</td>
             <td>{{number_format($product->price,2)}}</td>
             <td>
                 <a href="/admin/editProduct/{{$product->id}}" class="btn btn-warning">Edit</a>

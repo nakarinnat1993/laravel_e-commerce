@@ -16,9 +16,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['auth','verifyIsAdmin']], function () {
+
     // Category
     Route::get('/admin/createCategory', 'Admin\CategoryController@index');
     Route::post('/admin/createCategory', 'Admin\CategoryController@store');
