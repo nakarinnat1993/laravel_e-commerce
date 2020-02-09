@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
+use App\Cart;
 
 class ProductController extends Controller
 {
@@ -24,6 +25,14 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $categories = Category::all();
-        return view('product.showPorductDetail',compact('product','categories'));
+        return view('product.showPorductDetail', compact('product', 'categories'));
+    }
+    public function addToCart(Request $request,$id)
+    {
+        $product = Product::find($id);
+        $prevCart = $request->session()->get('cart');
+        $cart = new Cart($prevCart);
+        $cart->addItem($id,$product);
+
     }
 }

@@ -37,3 +37,9 @@ Route::group(['middleware' => ['auth','verifyIsAdmin']], function () {
     Route::get('/admin/deleteProduct/{id}', 'Admin\ProductController@delete');
 
 });
+
+Route::group(['middleware' => ['auth']], function () {
+    // Add to cart
+    Route::get('/product/addToCart/{id}', 'ProductController@addToCart');
+
+});

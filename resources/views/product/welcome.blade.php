@@ -45,14 +45,14 @@
                                     <img src="{{asset('storage')}}/product_image/{{$product->image}}" alt="" />
                                     <h2>{{number_format($product->price,2)}}</h2>
                                     <p>{{$product->name}}</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i
+                                    <a href="/product/addToCart/{{$product->id}}" class="btn btn-default add-to-cart"><i
                                             class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </div>
                                 <div class="product-overlay">
                                     <div class="overlay-content">
                                         <h2>{{number_format($product->price,2)}}</h2>
                                         <p>{{$product->name}}</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i
+                                        <a href="/product/addToCart/{{$product->id}}" class="btn btn-default add-to-cart"><i
                                                 class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                             <div class="choose">
                                 <ul class="nav nav-pills nav-justified">
                                     <li><a href="product/detail/{{$product->id}}"><i class="fa fa-info-circle"></i>Product Detail</a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a></li>
+                                    <li><a href="/product/addToCart/{{$product->id}}"><i class="fa fa-shopping-cart"></i>Add to cart</a></li>
                                 </ul>
                             </div>
                         </div>
