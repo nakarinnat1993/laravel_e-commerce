@@ -10,21 +10,13 @@
                     <h2>Category</h2>
                     <div class="panel-group category-products" id="accordian">
                         <!--category-productsr-->
+                        @foreach ($categories as $category)
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Kids</a></h4>
+                                <h4 class="panel-title"><a href="product/category/{{$category->id}}">{{$category->name}}</a></h4>
                             </div>
                         </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Fashion</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Households</a></h4>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <!--/category-products-->
 
@@ -45,20 +37,21 @@
                 <div class="features_items">
                     <!--features_items-->
                     <h2 class="title text-center">Features Items</h2>
+                    @foreach ($products as $product)
                     <div class="col-sm-4">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="images/home/product1.jpg" alt="" />
-                                    <h2>$56</h2>
-                                    <p>Easy Polo Black Edition</p>
+                                    <img src="{{asset('storage')}}/product_image/{{$product->image}}" alt="" />
+                                    <h2>{{number_format($product->price,2)}}</h2>
+                                    <p>{{$product->name}}</p>
                                     <a href="#" class="btn btn-default add-to-cart"><i
                                             class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </div>
                                 <div class="product-overlay">
                                     <div class="overlay-content">
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
+                                        <h2>{{number_format($product->price,2)}}</h2>
+                                        <p>{{$product->name}}</p>
                                         <a href="#" class="btn btn-default add-to-cart"><i
                                                 class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
@@ -72,8 +65,10 @@
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
                 <!--features_items-->
+                {{$products->links()}}
             </div>
         </div>
     </div>

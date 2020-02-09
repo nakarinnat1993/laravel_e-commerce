@@ -20,7 +20,7 @@
                     @if (Auth::user()->isAdmin)
                     <a href="admin/ProductDashboard" class="btn btn-primary">Product Management</a>
                     @endif
-                    <a href="#" class="btn btn-success">Home</a>
+                    <a href="/" class="btn btn-success">Home</a>
                 </div>
             </div>
         </div>

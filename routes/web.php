@@ -11,9 +11,8 @@
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ProductController@index');
+Route::get('/product/category/{id}', 'ProductController@findCategory');
 
 Auth::routes();
 
