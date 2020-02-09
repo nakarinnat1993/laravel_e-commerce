@@ -18,6 +18,12 @@ class ProductController extends Controller
         $categories = Category::all();
         $category_clicked = Category::find($id);
         $products = $category_clicked->products()->paginate(6);
-        return view('product.findProduct',compact('categories','category_clicked','products'));
+        return view('product.findProduct', compact('categories', 'category_clicked', 'products'));
+    }
+    public function detail($id)
+    {
+        $product = Product::find($id);
+        $categories = Category::all();
+        return view('product.showPorductDetail',compact('product','categories'));
     }
 }

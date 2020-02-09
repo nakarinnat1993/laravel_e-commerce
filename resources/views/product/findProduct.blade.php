@@ -60,7 +60,7 @@
                             </div>
                             <div class="choose">
                                 <ul class="nav nav-pills nav-justified">
-                                    <li><a href="#"><i class="fa fa-info-circle"></i>Product Detail</a></li>
+                                    <li><a href="product/detail/{{$product->id}}"><i class="fa fa-info-circle"></i>Product Detail</a></li>
                                     <li><a href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a></li>
                                 </ul>
                             </div>
@@ -73,7 +73,7 @@
                     @endforelse
                 </div>
                 <!--features_items-->
-                {{-- {{$products->links()}} --}}
+                {{$products->links()}}
             </div>
         </div>
     </div>

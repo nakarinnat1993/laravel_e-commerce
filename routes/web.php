@@ -13,6 +13,7 @@
 
 Route::get('/', 'ProductController@index');
 Route::get('/product/category/{id}', 'ProductController@findCategory');
+Route::get('/product/detail/{id}', 'ProductController@detail');
 
 Auth::routes();
 
