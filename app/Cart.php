@@ -23,11 +23,11 @@ class Cart
     public function addItem($id, $product)
     {
         $price = (int) $product->price;
-        if(array_key_exists($id,$this->items)){
+        if (array_key_exists($id, $this->items)) {
             $productToAdd = $this->items[$id];
             $productToAdd['qty']++;
-            $productToAdd['totalSinglePrice']=$productToAdd['qty']*$price;
-        }else{
+            $productToAdd['totalSinglePrice'] = $productToAdd['qty'] * $price;
+        } else {
             $productToAdd = ['qty' => 1, 'totalSinglePrice' => $price, 'data' => $product];
         }
 
@@ -35,5 +35,15 @@ class Cart
         $this->totalQty++;
         $this->totalPrice = $this->totalPrice + $price;
     }
-
+    public function updatePriceQty()
+    {
+        $totalQty = 0;
+        $totalPrice = 0;
+        foreach($this->items as $item){
+            $totalQty = $totalQty+$item['qty'];
+            $totalPrice = $totalPrice+$item['totalSinglePrice'];
+        }
+        $this->totalQty = $totalQty;
+        $this->totalPrice = $totalPrice;
+    }
 }

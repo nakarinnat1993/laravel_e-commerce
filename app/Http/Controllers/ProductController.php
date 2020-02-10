@@ -53,6 +53,10 @@ class ProductController extends Controller
         if(array_key_exists($id,$cart->items)){
             unset($cart->items[$id]);
         }
+        $afterCart = Session::get('cart');
+        $updateCart = new Cart($afterCart);
+        $updateCart->updatePriceQty();
+        Session::put('cart', $updateCart);
         return redirect()->route('showCart');
     }
 }
