@@ -47,4 +47,12 @@ class ProductController extends Controller
             return redirect('/');
         }
     }
+    public function deleteItemCart($id)
+    {
+        $cart = Session::get('cart');
+        if(array_key_exists($id,$cart->items)){
+            unset($cart->items[$id]);
+        }
+        return redirect()->route('showCart');
+    }
 }
