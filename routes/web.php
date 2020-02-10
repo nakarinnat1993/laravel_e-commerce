@@ -41,5 +41,6 @@ Route::group(['middleware' => ['auth','verifyIsAdmin']], function () {
 Route::group(['middleware' => ['auth']], function () {
     // Add to cart
     Route::get('/product/addToCart/{id}', 'ProductController@addToCart');
+    Route::get('/product/cart', 'ProductController@showCart');
 
 });

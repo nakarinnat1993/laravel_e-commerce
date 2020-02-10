@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+
+use App\Cart;
 use App\Category;
 use App\Product;
-use App\Cart;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -33,8 +34,17 @@ class ProductController extends Controller
         $product = Product::find($id);
         $prevCart = session()->get('cart');
         $cart = new Cart($prevCart);
-        $cart->addItem($id,$product);
-        session()->put('cart',$cart);
-        dump($cart);
+        $cart->addItem($id, $product);
+        session()->put('cart', $cart);
+        return redirect('/');
+    }
+    public function showCart()
+    {
+        $cart = Session::get('cart');
+        if ($cart) {
+            return view('product.showCart', ['cartItems' => $cart]);
+        } else {
+            return redirect('/');
+        }
     }
 }
