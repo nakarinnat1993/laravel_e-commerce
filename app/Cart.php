@@ -3,25 +3,37 @@ namespace App;
 
 class Cart
 {
-    public $item;
+    public $items;
     public $totalQty;
     public $totalPrice;
 
-    public function __construct($preCart)
+    public function __construct($prevCart)
     {
-        $this->item = [];
-        $this->totalQty = 0;
-        $this->totalPrice = 0;
+        if ($prevCart != null) {
+            $this->items = $prevCart->items;
+            $this->totalQty = $prevCart->totalQty;
+            $this->totalPrice = $prevCart->totalPrice;
+        } else {
+            $this->items = [];
+            $this->totalQty = 0;
+            $this->totalPrice = 0;
+        }
     }
 
     public function addItem($id, $product)
     {
         $price = (int) $product->price;
-        $productToAdd = ['qty' => 1, 'totalSinglePrice' => $price,'data'=>$product];
+        if(array_key_exists($id,$this->items)){
+            $productToAdd = $this->items[$id];
+            $productToAdd['qty']++;
+            $productToAdd['totalSinglePrice']=$productToAdd['qty']*$price;
+        }else{
+            $productToAdd = ['qty' => 1, 'totalSinglePrice' => $price, 'data' => $product];
+        }
 
-        $this->item[$id]=$productToAdd;
+        $this->items[$id] = $productToAdd;
         $this->totalQty++;
-        $this->totalPrice = $this->totalPrice+$price;
+        $this->totalPrice = $this->totalPrice + $price;
     }
 
 }

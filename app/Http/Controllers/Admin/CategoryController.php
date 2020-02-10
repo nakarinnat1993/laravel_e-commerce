@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::orderBy('id', 'desc')->paginate(3);
+        $categories = Category::orderBy('id', 'desc')->paginate(10);
         return view('admin.CategoryForm', compact('categories'));
     }
     public function create()
@@ -32,7 +32,7 @@ class CategoryController extends Controller
     }
     public function edit($id)
     {
-        $categories = Category::All();
+        $categories = Category::orderBy('id', 'desc')->paginate(10);
         $category = Category::find($id);
         return view('admin.CategoryForm', compact('categories', 'category'));
     }

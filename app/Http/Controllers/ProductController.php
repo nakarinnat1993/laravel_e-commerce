@@ -27,12 +27,14 @@ class ProductController extends Controller
         $categories = Category::all();
         return view('product.showPorductDetail', compact('product', 'categories'));
     }
-    public function addToCart(Request $request,$id)
+    public function addToCart($id)
     {
+        // session()->forget('cart');
         $product = Product::find($id);
-        $prevCart = $request->session()->get('cart');
+        $prevCart = session()->get('cart');
         $cart = new Cart($prevCart);
         $cart->addItem($id,$product);
-
+        session()->put('cart',$cart);
+        dump($cart);
     }
 }
