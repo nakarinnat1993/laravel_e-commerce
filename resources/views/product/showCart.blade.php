@@ -9,6 +9,16 @@
                 <li class="active">Shopping Cart</li>
             </ol>
         </div>
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+        @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
         <div class="table-responsive cart_info">
             <table class="table table-condensed">
                 <thead>
@@ -26,7 +36,8 @@
                     @foreach ($cartItems->items as $item)
                     <tr>
                         <td class="cart_product">
-                            <a href=""><img src="{{asset('storage')}}/product_image/{{$item['data']['image']}}" alt="" width="60"></a>
+                            <a href=""><img src="{{asset('storage')}}/product_image/{{$item['data']['image']}}" alt=""
+                                    width="60"></a>
                         </td>
                         <td class="cart_description">
                             <h4><a href="">{{$item['data']['name']}}</a></h4>
@@ -37,17 +48,20 @@
                         </td>
                         <td class="cart_quantity">
                             <div class="cart_quantity_button">
-                                <a class="cart_quantity_up" href=""> + </a>
+                                <a class="cart_quantity_up" href="/product/incrementCart/{{$item['data']['id']}}"> +
+                                </a>
                                 <input class="cart_quantity_input" type="text" name="quantity" value="{{$item['qty']}}"
                                     autocomplete="off" size="2">
-                                <a class="cart_quantity_down" href=""> - </a>
+                                <a class="cart_quantity_down" href="/product/decrementCart/{{$item['data']['id']}}"> -
+                                </a>
                             </div>
                         </td>
                         <td class="cart_total">
                             <p class="cart_total_price">{{number_format($item['totalSinglePrice'])}}</p>
                         </td>
                         <td class="cart_delete">
-                            <a class="cart_quantity_delete" href="/product/cart/deleteItemCart/{{$item['data']['id']}}" onclick="return confirm('Are you sure ?')"><i class="fa fa-times"></i></a>
+                            <a class="cart_quantity_delete" href="/product/cart/deleteItemCart/{{$item['data']['id']}}"
+                                onclick="return confirm('Are you sure ?')"><i class="fa fa-times"></i></a>
                         </td>
                     </tr>
                     @endforeach

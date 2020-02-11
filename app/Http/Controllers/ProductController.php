@@ -50,13 +50,37 @@ class ProductController extends Controller
     public function deleteItemCart($id)
     {
         $cart = Session::get('cart');
-        if(array_key_exists($id,$cart->items)){
+        if (array_key_exists($id, $cart->items)) {
             unset($cart->items[$id]);
         }
         $afterCart = Session::get('cart');
         $updateCart = new Cart($afterCart);
         $updateCart->updatePriceQty();
         Session::put('cart', $updateCart);
+        return redirect()->route('showCart');
+    }
+    public function incrementCart($id)
+    {
+        $product = Product::find($id);
+        $prevCart = session()->get('cart');
+        $cart = new Cart($prevCart);
+        $cart->addItem($id, $product);
+        session()->put('cart', $cart);
+        return redirect()->route('showCart');
+    }
+    public function decrementCart($id)
+    {
+        $product = Product::find($id);
+        $prevCart = session()->get('cart');
+        $cart = new Cart($prevCart);
+        if ($cart->items[$id]['qty'] > 1) {
+            $cart->items[$id]['qty'] = $cart->items[$id]['qty'] - 1;
+            $cart->items[$id]['totalSinglePrice'] = $cart->items[$id]['qty'] * $product['price'];
+            $cart->updatePriceQty();
+            session()->put('cart', $cart);
+        } else {
+            Session()->flash('error', 'Please select at least one item.');
+        }
         return redirect()->route('showCart');
     }
 }
