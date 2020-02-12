@@ -12,9 +12,10 @@ class ProductController extends Controller
 {
     public function index()
     {
+        $cartItems = Session::get('cart');
         $products = Product::paginate(6);
         $categories = Category::all()->sortBy('name');
-        return view('product.welcome', compact('products', 'categories'));
+        return view('product.welcome', compact('products', 'categories','cartItems'));
     }
     public function findCategory($id)
     {
@@ -41,9 +42,11 @@ class ProductController extends Controller
     }
     public function showCart()
     {
-        $cart = Session::get('cart');
-        if ($cart) {
-            return view('product.showCart', ['cartItems' => $cart]);
+        $cartItems = Session::get('cart');
+        if ($cartItems) {
+            // $cartItems = $cart;
+            return view('product.showCart',compact('cartItems'));
+            // return view('product.showCart')->with('cartItems',$cart);
         } else {
             return redirect('/');
         }
@@ -87,9 +90,10 @@ class ProductController extends Controller
 
     public function searchProduct(Request $request)
     {
+        $cartItems = Session::get('cart');
         $search=$request->search;
         $products = Product::where("name","like","%{$search}%")->paginate(6);
         $categories = Category::all()->sortBy('name');
-        return view('product.welcome', compact('products', 'categories'));
+        return view('product.welcome', compact('products', 'categories','cartItems'));
     }
 }

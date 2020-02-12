@@ -37,7 +37,7 @@
                 <div class="features_items">
                     <!--features_items-->
                     <h2 class="title text-center">Features Items</h2>
-                    @foreach ($products as $product)
+                    @forelse ($products as $product)
                     <div class="col-sm-4">
                         <div class="product-image-wrapper">
                             <div class="single-products">
@@ -65,7 +65,9 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <h2>No product [{{request()->query('search')}}]</h2>
+                    @endforelse
                 </div>
                 <!--features_items-->
                 {{$products->appends(['search'=>request()->query('search')])->links()}}
