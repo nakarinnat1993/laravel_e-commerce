@@ -68,7 +68,7 @@
                     @endforeach
                 </div>
                 <!--features_items-->
-                {{$products->links()}}
+                {{$products->appends(['search'=>request()->query('search')])->links()}}
             </div>
         </div>
     </div>

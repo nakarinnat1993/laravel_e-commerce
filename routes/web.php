@@ -47,3 +47,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/product/decrementCart/{id}', 'ProductController@decrementCart');
 
 });
+Route::get('/product/search', 'ProductController@searchProduct');

@@ -6,6 +6,7 @@ use App\Cart;
 use App\Category;
 use App\Product;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -82,5 +83,13 @@ class ProductController extends Controller
             Session()->flash('error', 'Please select at least one item.');
         }
         return redirect()->route('showCart');
+    }
+
+    public function searchProduct(Request $request)
+    {
+        $search=$request->search;
+        $products = Product::where("name","like","%{$search}%")->paginate(6);
+        $categories = Category::all()->sortBy('name');
+        return view('product.welcome', compact('products', 'categories'));
     }
 }
