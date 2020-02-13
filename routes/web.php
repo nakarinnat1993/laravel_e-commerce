@@ -48,3 +48,4 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 Route::get('/product/search', 'ProductController@searchProduct');
+Route::get('/product/priceRange', 'ProductController@searchProductPrice');

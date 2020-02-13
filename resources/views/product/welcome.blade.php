@@ -24,9 +24,12 @@
                         <!--price-range-->
                         <h2>Price Range</h2>
                         <div class="well text-center">
-                            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600"
-                                data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br />
-                            <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
+                            <form action="/product/priceRange" method="get">
+                                <input type="text" class="span2"  data-slider-min="{{round($minPrice)}}" data-slider-max="10000"
+                                    data-slider-step="5" data-slider-value="[{{round($minPrice)}},10000]" id="sl2" name="price"><br />
+                                <b class="pull-left">$ {{round($minPrice)}}</b> <b class="pull-right">$ 10,000</b>
+                                <input type="submit" value="Search" class="btn btn-primary">
+                            </form>
                         </div>
                     </div>
                     <!--/price-range-->
@@ -66,11 +69,11 @@
                         </div>
                     </div>
                     @empty
-                    <h2>No product [{{request()->query('search')}}]</h2>
+                    <h2>No product </h2>
                     @endforelse
                 </div>
                 <!--features_items-->
-                {{$products->appends(['search'=>request()->query('search')])->links()}}
+                {{$products->appends(['search'=>request()->query('search')])->appends(['price'=>request()->query('price')])->links()}}
             </div>
         </div>
     </div>

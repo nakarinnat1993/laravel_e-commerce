@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\Category;
 use App\Product;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -14,8 +14,9 @@ class ProductController extends Controller
     {
         $cartItems = Session::get('cart');
         $products = Product::paginate(6);
+        $minPrice = Product::min('price');
         $categories = Category::all()->sortBy('name');
-        return view('product.welcome', compact('products', 'categories','cartItems'));
+        return view('product.welcome', compact('products', 'categories', 'cartItems','minPrice'));
     }
     public function findCategory($id)
     {
@@ -45,7 +46,7 @@ class ProductController extends Controller
         $cartItems = Session::get('cart');
         if ($cartItems) {
             // $cartItems = $cart;
-            return view('product.showCart',compact('cartItems'));
+            return view('product.showCart', compact('cartItems'));
             // return view('product.showCart')->with('cartItems',$cart);
         } else {
             return redirect('/');
@@ -91,9 +92,19 @@ class ProductController extends Controller
     public function searchProduct(Request $request)
     {
         $cartItems = Session::get('cart');
-        $search=$request->search;
-        $products = Product::where("name","like","%{$search}%")->paginate(6);
+        $search = $request->search;
+        $products = Product::where("name", "like", "%{$search}%")->paginate(6);
         $categories = Category::all()->sortBy('name');
-        return view('product.welcome', compact('products', 'categories','cartItems'));
+        $minPrice = Product::min('price');
+        return view('product.welcome', compact('products', 'categories', 'cartItems','minPrice'));
+    }
+    public function searchProductPrice(Request $request)
+    {
+        $cartItems = Session::get('cart');
+        $arrPrice = explode(",",$request->price);
+        $products = Product::whereBetween('price',$arrPrice)->orderBy('price')->paginate(2);
+        $categories = Category::all()->sortBy('name');
+        $minPrice = Product::min('price');
+        return view('product.welcome', compact('products', 'categories', 'cartItems','minPrice'));
     }
 }
