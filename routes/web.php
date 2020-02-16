@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/product/cart/deleteItemCart/{id}', 'ProductController@deleteItemCart');
     Route::get('/product/incrementCart/{id}', 'ProductController@incrementCart');
     Route::get('/product/decrementCart/{id}', 'ProductController@decrementCart');
+    Route::post('/product/addQtyToCart', 'ProductController@addQtyToCart');
 
 });
 Route::get('/product/search', 'ProductController@searchProduct');

@@ -16,7 +16,7 @@ class ProductController extends Controller
         $products = Product::paginate(6);
         $minPrice = Product::min('price');
         $categories = Category::all()->sortBy('name');
-        return view('product.welcome', compact('products', 'categories', 'cartItems','minPrice'));
+        return view('product.welcome', compact('products', 'categories', 'cartItems', 'minPrice'));
     }
     public function findCategory($id)
     {
@@ -40,6 +40,18 @@ class ProductController extends Controller
         $cart->addItem($id, $product);
         session()->put('cart', $cart);
         return redirect('/');
+    }
+    public function addQtyToCart(Request $request)
+    {
+        $id = $request->_id;
+        $qty = $request->qty;
+        // dd($request->all());
+        $product = Product::find($id);
+        $prevCart = session()->get('cart');
+        $cart = new Cart($prevCart);
+        $cart->addQtyitem($id, $product, $qty);
+        session()->put('cart', $cart);
+        return redirect()->route('showCart');
     }
     public function showCart()
     {
@@ -96,15 +108,15 @@ class ProductController extends Controller
         $products = Product::where("name", "like", "%{$search}%")->paginate(6);
         $categories = Category::all()->sortBy('name');
         $minPrice = Product::min('price');
-        return view('product.welcome', compact('products', 'categories', 'cartItems','minPrice'));
+        return view('product.welcome', compact('products', 'categories', 'cartItems', 'minPrice'));
     }
     public function searchProductPrice(Request $request)
     {
         $cartItems = Session::get('cart');
-        $arrPrice = explode(",",$request->price);
-        $products = Product::whereBetween('price',$arrPrice)->orderBy('price')->paginate(2);
+        $arrPrice = explode(",", $request->price);
+        $products = Product::whereBetween('price', $arrPrice)->orderBy('price')->paginate(2);
         $categories = Category::all()->sortBy('name');
         $minPrice = Product::min('price');
-        return view('product.welcome', compact('products', 'categories', 'cartItems','minPrice'));
+        return view('product.welcome', compact('products', 'categories', 'cartItems', 'minPrice'));
     }
 }

@@ -49,13 +49,18 @@
                             <p>{{$product->description}}</p>
                             <img src="images/product-details/rating.png" alt="" />
                             <span>
+                                <form action="/product/addQtyToCart" method="post">
                                 <span>{{number_format($product->price)}} </span>
                                 <label>Quantity:</label>
-                                <input type="text" value="1" />
-                                <button type="button" class="btn btn-fefault cart">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    Add to cart
-                                </button>
+                                    @csrf
+                                    <input type="hidden" name="_id" value="{{$product->id}}">
+                                    <input type="text" value="1" name="qty"/>
+                                    <button type="submit" class="btn btn-fefault cart">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Add to cart
+                                    </button>
+
+                                </form>
                             </span>
                             <p><b>Category:</b> {{$product->category->name}}</p>
                             <a href=""><img src="images/product-details/share.png" class="share img-responsive"

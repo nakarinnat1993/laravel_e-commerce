@@ -35,6 +35,24 @@ class Cart
         $this->totalQty++;
         $this->totalPrice = $this->totalPrice + $price;
     }
+    public function addQtyitem($id, $product,$amount)
+    {
+        if($amount>0){
+
+            $price = (int) $product->price;
+            if (array_key_exists($id, $this->items)) {
+                $productToAdd = $this->items[$id];
+                $productToAdd['qty'] = $productToAdd['qty']+$amount;
+                $productToAdd['totalSinglePrice'] = $productToAdd['qty'] * $price;
+            } else {
+                $productToAdd = ['qty' => $amount, 'totalSinglePrice' => $amount*$price, 'data' => $product];
+            }
+        }
+
+        $this->items[$id] = $productToAdd;
+        $this->totalQty = $this->totalQty+$amount;
+        $this->totalPrice = $this->totalPrice + ($amount*$price);
+    }
     public function updatePriceQty()
     {
         $totalQty = 0;
