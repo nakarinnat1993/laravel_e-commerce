@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/product/decrementCart/{id}', 'ProductController@decrementCart');
     Route::post('/product/addQtyToCart', 'ProductController@addQtyToCart');
 
+
+    Route::get('/product/checkout', 'ProductController@checkout');
 });
 Route::get('/product/search', 'ProductController@searchProduct');
 Route::get('/product/priceRange', 'ProductController@searchProductPrice');

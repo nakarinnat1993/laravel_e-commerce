@@ -119,4 +119,8 @@ class ProductController extends Controller
         $minPrice = Product::min('price');
         return view('product.welcome', compact('products', 'categories', 'cartItems', 'minPrice'));
     }
+    public function checkout()
+    {
+        return view('product.checkoutPage');
+    }
 }

@@ -126,7 +126,7 @@
         <!--/header-bottom-->
     </header>
     <!--/header-->
-    <section id="slider">
+    {{-- <section id="slider">
         <!--slider-->
         <div class="container">
             <div class="row">
@@ -193,5 +193,5 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--/slider-->

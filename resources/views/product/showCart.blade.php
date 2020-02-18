@@ -82,7 +82,7 @@
                         <li>Total Price<span>{{number_format($cartItems->totalPrice)}}</span></li>
                     </ul>
                     <a class="btn btn-default update" href="">Update</a>
-                    <a class="btn btn-default check_out" href="">Check Out</a>
+                    <a class="btn btn-default check_out" href="/product/checkout">Check Out</a>
                 </div>
             </div>
         </div>
