@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::get('/product/checkout', 'ProductController@checkout');
+    Route::post('/product/createOrder', 'ProductController@createOrder');
 });
 Route::get('/product/search', 'ProductController@searchProduct');
 Route::get('/product/priceRange', 'ProductController@searchProductPrice');

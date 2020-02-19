@@ -15,7 +15,8 @@
                     <div class="bill-to">
                         <p> Shipping/Bill To</p>
                         <div class="form-one">
-                            <form action="" method="post" class="form-group">
+                            <form action="/product/createOrder" method="post" class="form-group">
+                                @csrf
                                 <input type="text" name="email" placeholder="Email*" required>
                                 <input type="text" name="fname" placeholder="First Name *" required>
                                 <input type="text" name="lname" placeholder="Last Name *" required>

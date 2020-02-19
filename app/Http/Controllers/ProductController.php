@@ -6,6 +6,8 @@ use App\Cart;
 use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
@@ -122,5 +124,57 @@ class ProductController extends Controller
     public function checkout()
     {
         return view('product.checkoutPage');
+    }
+    public function createOrder(Request $request)
+    {
+        $cartItems = Session::get('cart');
+        $fname = $request->fname;
+        $lname = $request->lname;
+        $email = $request->email;
+        $address = $request->address;
+        $zip = $request->zip;
+        $phone = $request->phone;
+        $user_id = Auth::id();
+
+        if ($cartItems) {
+            $create_date = date("Y-m-d H:i:s");
+            $newOrder = array(
+                "create_date" => $create_date,
+                "price" => $cartItems->totalPrice,
+                "status" => "Not paid",
+                "del_date" => $create_date,
+                "fname" => $fname,
+                "lname" => $lname,
+                "address" => $address,
+                "email" => $email,
+                "zip" => $zip,
+                "phone" => $phone,
+                "user_id" => $user_id,
+            );
+
+            $create_order = DB::table('orders')->insert($newOrder);
+            $order_id = DB::getPDO()->lastInsertId();
+            foreach ($cartItems->items as $item) {
+                $item_id = $item['data']['id'];
+                $item_name = $item['data']['name'];
+                $item_price = $item['data']['price'];
+                $newOrderItem = array(
+                    "item_id" => $item_id,
+                    "order_id" => $order_id,
+                    "item_name" => $item_name,
+                    "item_price" => $item_price,
+                );
+                $create_orderItem = DB::table('orderitems')->insert($newOrderItem);
+
+            }
+            Session::forget('cart');
+            $payment_info = $newOrder;
+            $payment_info["order_id"] = $order_id;
+            Session::put('payment_info');
+            return redirect('/product/showPayment');
+        }else{
+            return redirect('/');
+        }
+
     }
 }
