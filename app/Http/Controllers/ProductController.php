@@ -170,11 +170,20 @@ class ProductController extends Controller
             Session::forget('cart');
             $payment_info = $newOrder;
             $payment_info["order_id"] = $order_id;
-            Session::put('payment_info');
-            return redirect('/product/showPayment');
+            session()->put('payment_info',$payment_info);
+            return \redirect('/product/showPayment');
         }else{
             return redirect('/');
         }
 
+    }
+    function showPayment(){
+        $payment_info = Session::get('payment_info');
+        // dd($payment_info);
+        if($payment_info['status']=="Not paid"){
+            return view("payment.paymentPage",compact('payment_info'));
+        }else{
+            return \redirect('/');
+        }
     }
 }
