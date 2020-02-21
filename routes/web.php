@@ -36,6 +36,11 @@ Route::group(['middleware' => ['auth','verifyIsAdmin']], function () {
     Route::post('/admin/updateProduct/{id}', 'Admin\ProductController@update');
     Route::get('/admin/deleteProduct/{id}', 'Admin\ProductController@delete');
 
+    // Order
+    Route::get('/admin/order', 'Admin\OrderController@orderPanel');
+    Route::get('/admin/showOrderItem/{id}', 'Admin\OrderController@showOrderItem');
+
+
 });
 
 Route::group(['middleware' => ['auth']], function () {

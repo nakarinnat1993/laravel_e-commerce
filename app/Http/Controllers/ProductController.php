@@ -158,11 +158,13 @@ class ProductController extends Controller
                 $item_id = $item['data']['id'];
                 $item_name = $item['data']['name'];
                 $item_price = $item['data']['price'];
+                $item_amount = $item['qty'];
                 $newOrderItem = array(
                     "item_id" => $item_id,
                     "order_id" => $order_id,
                     "item_name" => $item_name,
                     "item_price" => $item_price,
+                    "item_amount" => $item_amount,
                 );
                 $create_orderItem = DB::table('orderitems')->insert($newOrderItem);
 

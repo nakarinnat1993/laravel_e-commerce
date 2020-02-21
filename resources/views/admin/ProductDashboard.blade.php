@@ -10,6 +10,7 @@
             <th>Category</th>
             <th>Description</th>
             <th>Price</th>
+            <th>User</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -21,6 +22,7 @@
             <td>{{$product->category->name}}</td>
             <td>{{Str::limit($product->description,20)}}</td>
             <td>{{number_format($product->price,2)}}</td>
+            <td>{{$product->user->name}}</td>
             <td>
                 <a href="/admin/editProduct/{{$product->id}}" class="btn btn-warning">Edit</a>
             </td>

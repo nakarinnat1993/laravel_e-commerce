@@ -30,7 +30,7 @@
                 <a href="/admin/ProductDashboard" class="list-group-item list-group-item-action bg-light">Dashboard</a>
                 <a href="/admin/createProduct" class="list-group-item list-group-item-action bg-light">Product</a>
                 <a href="/admin/createCategory" class="list-group-item list-group-item-action bg-light">Category</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Order</a>
+                <a href="/admin/order" class="list-group-item list-group-item-action bg-light">Order</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">User</a>
             </div>
         </div>
