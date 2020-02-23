@@ -48,8 +48,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/product/addToCart/{id}', 'ProductController@addToCart');
     Route::get('/product/cart', 'ProductController@showCart')->name('showCart');
     Route::get('/product/cart/deleteItemCart/{id}', 'ProductController@deleteItemCart');
-    Route::get('/product/incrementCart/{id}', 'ProductController@incrementCart');
-    Route::get('/product/decrementCart/{id}', 'ProductController@decrementCart');
+    Route::get('/product/incrementCart', 'ProductController@incrementCart');
+    Route::get('/product/decrementCart', 'ProductController@decrementCart');
     Route::post('/product/addQtyToCart', 'ProductController@addQtyToCart');
 
 

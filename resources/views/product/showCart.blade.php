@@ -48,16 +48,19 @@
                         </td>
                         <td class="cart_quantity">
                             <div class="cart_quantity_button">
-                                <a class="cart_quantity_up" href="/product/incrementCart/{{$item['data']['id']}}"> +
+                                <a class="cart_quantity_up" href="javascript:void(0)"
+                                    onclick="incrementCart('{{$item['data']['id']}}')"> +
                                 </a>
-                                <input class="cart_quantity_input" type="text" name="quantity" value="{{$item['qty']}}"
-                                    autocomplete="off" size="2" readonly>
-                                <a class="cart_quantity_down" href="/product/decrementCart/{{$item['data']['id']}}"> -
+                                <input class="cart_quantity_input" type="text" name="quantity{{$item['data']['id']}}"
+                                id="quantity{{$item['data']['id']}}" value="{{$item['qty']}}" autocomplete="off"
+                                size="2" readonly>
+                                <a class="cart_quantity_down" href="javascript:void(0)"
+                                    onclick="decrementCart('{{$item['data']['id']}}')"> -
                                 </a>
                             </div>
                         </td>
                         <td class="cart_total">
-                            <p class="cart_total_price">{{number_format($item['totalSinglePrice'])}}</p>
+                            <p class="cart_total_price" id="totalSinglePrice{{$item['data']['id']}}">{{number_format($item['totalSinglePrice'])}}</p>
                         </td>
                         <td class="cart_delete">
                             <a class="cart_quantity_delete" href="/product/cart/deleteItemCart/{{$item['data']['id']}}"
@@ -78,8 +81,8 @@
             <div class="col-sm-12">
                 <div class="total_area">
                     <ul>
-                        <li>Total Q'ty <span>{{$cartItems->totalQty}}</span></li>
-                        <li>Total Price<span>{{number_format($cartItems->totalPrice)}}</span></li>
+                        <li>Total Q'ty <span id="totalQtyLi">{{$cartItems->totalQty}}</span></li>
+                        <li>Total Price<span id="totalPrice">{{number_format($cartItems->totalPrice)}}</span></li>
                     </ul>
                     @if (count($cartItems->items)>0)
                     @endif
@@ -91,4 +94,42 @@
     </div>
 </section>
 <!--/#do_action-->
+<script>
+    $(document).ready(function(){
+
+    });
+
+    function incrementCart(id){
+        // alert(id);
+        $.ajax({
+            url:"/product/incrementCart",
+            method:'GET',
+            data:{id:id},
+            dataType:'json',
+            success:function(data){
+                $("#quantity"+id).val(data.items[id].qty);
+                $("#totalSinglePrice"+id).html(data.items[id].totalSinglePrice);
+                $("#totalQty").html(data.totalQty);
+                $("#totalQtyLi").html(data.totalQty);
+                $("#totalPrice").html(data.totalPrice);
+            }
+        })
+    }
+    function decrementCart(id){
+        // alert(id);
+        $.ajax({
+            url:"/product/decrementCart",
+            method:'GET',
+            data:{id:id},
+            dataType:'json',
+            success:function(data){
+                $("#quantity"+id).val(data.items[id].qty);
+                $("#totalSinglePrice"+id).html(data.items[id].totalSinglePrice);
+                $("#totalQty").html(data.totalQty);
+                $("#totalQtyLi").html(data.totalQty);
+                $("#totalPrice").html(data.totalPrice);
+            }
+        })
+    }
+</script>
 @endsection

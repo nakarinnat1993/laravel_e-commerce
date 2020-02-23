@@ -78,17 +78,20 @@ class ProductController extends Controller
         Session::put('cart', $updateCart);
         return redirect()->route('showCart');
     }
-    public function incrementCart($id)
+    public function incrementCart(Request $request)
     {
+        $id = $request->id;
         $product = Product::find($id);
         $prevCart = session()->get('cart');
         $cart = new Cart($prevCart);
         $cart->addItem($id, $product);
         session()->put('cart', $cart);
-        return redirect()->route('showCart');
+        // return redirect()->route('showCart');
+        echo json_encode($cart);
     }
-    public function decrementCart($id)
+    public function decrementCart(Request $request)
     {
+        $id = $request->id;
         $product = Product::find($id);
         $prevCart = session()->get('cart');
         $cart = new Cart($prevCart);
@@ -100,7 +103,7 @@ class ProductController extends Controller
         } else {
             Session()->flash('error', 'Please select at least one item.');
         }
-        return redirect()->route('showCart');
+        echo json_encode($cart);
     }
 
     public function searchProduct(Request $request)
@@ -124,10 +127,10 @@ class ProductController extends Controller
     public function checkout()
     {
         $cartItems = Session::get('cart');
-        if(count($cartItems->items)>0){
+        if (count($cartItems->items) > 0) {
 
             return view('product.checkoutPage');
-        }else{
+        } else {
             Session()->flash('error', 'No product');
             return redirect()->route('showCart');
         }
@@ -179,19 +182,20 @@ class ProductController extends Controller
             Session::forget('cart');
             $payment_info = $newOrder;
             $payment_info["order_id"] = $order_id;
-            session()->put('payment_info',$payment_info);
+            session()->put('payment_info', $payment_info);
             return \redirect('/product/showPayment');
-        }else{
+        } else {
             return redirect('/');
         }
 
     }
-    function showPayment(){
+    public function showPayment()
+    {
         $payment_info = Session::get('payment_info');
         // dd($payment_info);
-        if($payment_info['status']=="Not paid"){
-            return view("payment.paymentPage",compact('payment_info'));
-        }else{
+        if ($payment_info['status'] == "Not paid") {
+            return view("payment.paymentPage", compact('payment_info'));
+        } else {
             return \redirect('/');
         }
     }

@@ -14,6 +14,8 @@
     <link href="{{asset('css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('css/main.css')}}" rel="stylesheet">
     <link href="{{asset('css/responsive.css')}}" rel="stylesheet">
+
+    <script src="{{asset('js/jquery.js')}}"></script>
 </head>
 <!--/head-->
 
@@ -59,7 +61,7 @@
                                 <li><a href="/product/cart">
                                     <i class="fa fa-shopping-cart"></i> Cart
                                     @if (isset($cartItems))
-                                        <span class="badge badge-warning" style="background:darkorange">{{$cartItems->totalQty}}</span>
+                                        <span class="badge badge-warning" style="background:darkorange" id="totalQty">{{$cartItems->totalQty}}</span>
                                     @endif
                                     </a>
                                 </li>
