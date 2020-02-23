@@ -51,7 +51,7 @@
                                 <a class="cart_quantity_up" href="/product/incrementCart/{{$item['data']['id']}}"> +
                                 </a>
                                 <input class="cart_quantity_input" type="text" name="quantity" value="{{$item['qty']}}"
-                                    autocomplete="off" size="2">
+                                    autocomplete="off" size="2" readonly>
                                 <a class="cart_quantity_down" href="/product/decrementCart/{{$item['data']['id']}}"> -
                                 </a>
                             </div>
@@ -81,6 +81,8 @@
                         <li>Total Q'ty <span>{{$cartItems->totalQty}}</span></li>
                         <li>Total Price<span>{{number_format($cartItems->totalPrice)}}</span></li>
                     </ul>
+                    @if (count($cartItems->items)>0)
+                    @endif
                     <a class="btn btn-default update" href="">Update</a>
                     <a class="btn btn-default check_out" href="/product/checkout">Check Out</a>
                 </div>

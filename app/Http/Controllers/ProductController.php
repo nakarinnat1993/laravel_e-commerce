@@ -123,7 +123,14 @@ class ProductController extends Controller
     }
     public function checkout()
     {
-        return view('product.checkoutPage');
+        $cartItems = Session::get('cart');
+        if(count($cartItems->items)>0){
+
+            return view('product.checkoutPage');
+        }else{
+            Session()->flash('error', 'No product');
+            return redirect()->route('showCart');
+        }
     }
     public function createOrder(Request $request)
     {
