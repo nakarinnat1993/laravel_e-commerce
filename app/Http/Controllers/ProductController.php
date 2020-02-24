@@ -33,15 +33,17 @@ class ProductController extends Controller
         $categories = Category::all();
         return view('product.showPorductDetail', compact('product', 'categories'));
     }
-    public function addToCart($id)
+    public function addToCart(Request $request)
     {
+        $id = $request->id;
         // session()->forget('cart');
         $product = Product::find($id);
         $prevCart = session()->get('cart');
         $cart = new Cart($prevCart);
         $cart->addItem($id, $product);
         session()->put('cart', $cart);
-        return redirect('/');
+        // return redirect('/');
+        echo json_encode($cart);
     }
     public function addQtyToCart(Request $request)
     {
@@ -101,8 +103,10 @@ class ProductController extends Controller
             $cart->updatePriceQty();
             session()->put('cart', $cart);
         } else {
-            Session()->flash('error', 'Please select at least one item.');
+            // Session()->flash('error', 'Please select at least one item.');
+            $cart->error="Please select at least one item.";
         }
+
         echo json_encode($cart);
     }
 

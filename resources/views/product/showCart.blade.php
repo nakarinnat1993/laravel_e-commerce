@@ -128,6 +128,9 @@
                 $("#totalQty").html(data.totalQty);
                 $("#totalQtyLi").html(data.totalQty);
                 $("#totalPrice").html(data.totalPrice);
+                if(data.error){
+                    alert(data.error);
+                }
             }
         })
     }

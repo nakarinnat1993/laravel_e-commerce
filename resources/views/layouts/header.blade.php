@@ -61,7 +61,9 @@
                                 <li><a href="/product/cart">
                                     <i class="fa fa-shopping-cart"></i> Cart
                                     @if (isset($cartItems))
-                                        <span class="badge badge-warning" style="background:darkorange" id="totalQty">{{$cartItems->totalQty}}</span>
+                                    <span class="badge badge-warning" style="background:darkorange" id="totalQty">{{$cartItems->totalQty}}</span>
+                                    @else
+                                    <span class="badge badge-warning" style="background:darkorange" id="totalQty">0</span>
                                     @endif
                                     </a>
                                 </li>

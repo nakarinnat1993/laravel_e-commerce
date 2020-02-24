@@ -13,7 +13,8 @@
                         @foreach ($categories as $category)
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="product/category/{{$category->id}}">{{$category->name}}</a></h4>
+                                <h4 class="panel-title"><a
+                                        href="product/category/{{$category->id}}">{{$category->name}}</a></h4>
                             </div>
                         </div>
                         @endforeach
@@ -25,8 +26,9 @@
                         <h2>Price Range</h2>
                         <div class="well text-center">
                             <form action="/product/priceRange" method="get">
-                                <input type="text" class="span2"  data-slider-min="{{round($minPrice)}}" data-slider-max="10000"
-                                    data-slider-step="5" data-slider-value="[{{round($minPrice)}},10000]" id="sl2" name="price"><br />
+                                <input type="text" class="span2" data-slider-min="{{round($minPrice)}}"
+                                    data-slider-max="10000" data-slider-step="5"
+                                    data-slider-value="[{{round($minPrice)}},10000]" id="sl2" name="price"><br />
                                 <b class="pull-left">$ {{round($minPrice)}}</b> <b class="pull-right">$ 10,000</b>
                                 <input type="submit" value="Search" class="btn btn-primary">
                             </form>
@@ -48,22 +50,26 @@
                                     <img src="{{asset('storage')}}/product_image/{{$product->image}}" alt="" />
                                     <h2>{{number_format($product->price,2)}}</h2>
                                     <p>{{$product->name}}</p>
-                                    <a href="/product/addToCart/{{$product->id}}" class="btn btn-default add-to-cart"><i
-                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a onclick="addToCart('{{$product->id}}')" href="javascript:void(0)"
+                                        class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
+                                        cart</a>
                                 </div>
                                 <div class="product-overlay">
                                     <div class="overlay-content">
                                         <h2>{{number_format($product->price,2)}}</h2>
                                         <p>{{$product->name}}</p>
-                                        <a href="/product/addToCart/{{$product->id}}" class="btn btn-default add-to-cart"><i
-                                                class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a onclick="addToCart('{{$product->id}}')" href="javascript:void(0)"
+                                            class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                                            to cart</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="choose">
                                 <ul class="nav nav-pills nav-justified">
-                                    <li><a href="product/detail/{{$product->id}}"><i class="fa fa-info-circle"></i>Product Detail</a></li>
-                                    <li><a href="/product/addToCart/{{$product->id}}"><i class="fa fa-shopping-cart"></i>Add to cart</a></li>
+                                    <li><a href="product/detail/{{$product->id}}"><i
+                                                class="fa fa-info-circle"></i>Product Detail</a></li>
+                                    <li><a onclick="addToCart('{{$product->id}}')" href="javascript:void(0)"><i
+                                                class="fa fa-shopping-cart"></i>Add to cart</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -78,4 +84,22 @@
         </div>
     </div>
 </section>
+<script>
+    $(document).ready(function(){
+
+    });
+
+    function addToCart(id){
+        // alert(id);
+        $.ajax({
+            url:"/product/addToCart/",
+            method:'GET',
+            data:{id:id},
+            dataType:'json',
+            success:function(data){
+                $("#totalQty").html(data.totalQty);
+            }
+        })
+    }
+</script>
 @endsection
