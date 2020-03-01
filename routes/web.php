@@ -40,6 +40,10 @@ Route::group(['middleware' => ['auth','verifyIsAdmin']], function () {
     Route::get('/admin/order', 'Admin\OrderController@orderPanel');
     Route::get('/admin/showOrderItem/{id}', 'Admin\OrderController@showOrderItem');
 
+    //User
+    Route::get('/admin/user', 'Admin\UserController@index');
+
+
 
 });
 
