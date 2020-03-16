@@ -18,7 +18,6 @@
         <h5 class="my-0 mr-md-auto font-weight-normal">Admin Panel</h5>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="/">Home</a>
-            <a class="p-2 text-dark" href="#">Dashboard</a>
             <a class="p-2 text-dark" href="/home">Profile</a>
             <a class="p-2 text-dark" href="#">Help</a>
         </nav>
@@ -31,7 +30,7 @@
                 <a href="/admin/createProduct" class="list-group-item list-group-item-action bg-light">Product</a>
                 <a href="/admin/createCategory" class="list-group-item list-group-item-action bg-light">Category</a>
                 <a href="/admin/order" class="list-group-item list-group-item-action bg-light">Order</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">User</a>
+                <a href="/admin/user" class="list-group-item list-group-item-action bg-light">User</a>
             </div>
         </div>
         <div id="page-content-wrapper">
